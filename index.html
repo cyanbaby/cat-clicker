@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>Cat Clicker</title>
+	<style>
+		#catList {float: left; margin-right: 30px;}
+		#catList > li {padding: 5px 0; cursor: pointer;}
+		#catDetail {overflow: hidden;}
+		#catDetail > img {max-width: 400px; max-height: 280px;}
+		#catClicks {margin-left: 30px;}
+		.active {color: #06c;}
+
+		.form {position: absolute; display: none; transform: translate(50%, -50px);}
+		.form label {display: inline-block; width: 5em; margin-right: 5px; text-align: right;}
+		.btn-group {padding-left: calc(5em + 5px);}
+	</style>
+</head>
+<body>
+	<!-- 列表 -->
+	<ul id="catList"></ul>
+
+	<!-- 详情 -->
+	<div id="catDetail">
+		<p>
+			<strong id="catName"></strong>
+			<span id="catClicks"></span> clicks
+		</p>
+		<img id="catImg" src="">
+	</div>
+
+	<!-- 表单 -->
+	<div>
+		<p><button class="btn-admin">Admin</button></p>
+		<div class="form">
+			<p>
+				<label>Name: </label>
+				<input type="text" id="name">
+			</p>
+			<p>
+				<label>ImgURL: </label>
+				<input type="text" id="imgUrl">
+			</p>
+			<p>
+				<label>Clicks: </label>
+				<input type="text" id="clicks">
+			</p>
+			<p class="btn-group">
+				<button class="btn-cancel">Cancel</button>
+				<button class="btn-save">Save</button>
+			</p>
+		</div>
+	</div>
+
+	<script src="app.js"></script>
+	<script src="jquery-1.12.4.min.js"></script>
+</body>
+</html>
