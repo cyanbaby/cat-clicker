@@ -1,6 +1,6 @@
 $(function() {
-	/********************** Modal **********************/
-	var modal = {
+	/********************** Model **********************/
+	var model = {
 		cats: [
 			{
 				name: 'Sweet',
@@ -35,7 +35,7 @@ $(function() {
 			var self = this;
 
 			this.$list = $('#catList');
-			
+
 			// 切换列表点击事件
 			this.$list.on('click', 'li', function() {
 				if ($(this).hasClass('active')) {
@@ -76,7 +76,7 @@ $(function() {
 			this.$name = $('#catName');
 			this.$img = $('#catImg');
 			this.$clickCount = $('#catClicks');
-			
+
 			// 点击计数
 			$('#catDetail').on('click', 'img', function() {
 				octopus.increase();
@@ -97,7 +97,7 @@ $(function() {
 	var formView = {
 		init: function() {
 			var self = this;
-			
+
 			this.$form = $('.form');
 			this.$inputName = $('#name');
 			this.$inputImgUrl = $('#imgUrl');
@@ -145,18 +145,18 @@ $(function() {
 
 	/********************** Presenter **********************/
 	var octopus = {
-		// 从 modal 中获取所有 cat
+		// 从 model 中获取所有 cat
 		getAll: function() {
-			return modal.cats;
+			return model.cats;
 		},
 
 		// 获取/设置当前索引
 		catIndex: function(index) {
 			if (typeof index === 'number') {
-				modal.catIndex = index;
+				model.catIndex = index;
 			}
 
-			return modal.catIndex;
+			return model.catIndex;
 		},
 
 		// 获取当前 cat 对象
@@ -176,19 +176,19 @@ $(function() {
 		// 获取/设置 admin 模式
 		adminMode: function(modeState) {
 			if (typeof modeState === 'boolean') {
-				modal.isAdminMode = modeState;
+				model.isAdminMode = modeState;
 			}
 
-			return modal.isAdminMode;
+			return model.isAdminMode;
 		},
 
-		// 更新 modal 数据
+		// 更新 model 数据
 		update: function(data) {
-			modal.cats[this.catIndex()] = data;
+			model.cats[this.catIndex()] = data;
 		},
 		init: function() {
-			modal.catIndex = 0;  // 缺省显示列表中第一个
-			modal.isAdminMode = false;  // 缺省不启用 admin 模式
+			model.catIndex = 0;  // 缺省显示列表中第一个
+			model.isAdminMode = false;  // 缺省不启用 admin 模式
 
 			listView.init();
 			detailView.init();
