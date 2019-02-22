@@ -4,6 +4,8 @@
 
 ----
 
+[演示地址](https://wingmeng.github.io/cat-clicker/)
+
 ## 一、MVP的作用
 
 1. 对项目代码进行分层，使得整个项目的代码结构更清晰、易维护；

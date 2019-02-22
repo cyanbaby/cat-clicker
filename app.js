@@ -1,4 +1,4 @@
-$(function() {
+!function() {
 	/********************** Model **********************/
 	var model = {
 		cats: [
@@ -34,19 +34,23 @@ $(function() {
 		init: function() {
 			var self = this;
 
-			this.$list = $('#catList');
+			this.$list = $$('#catList');
 
 			// 切换列表点击事件
-			this.$list.on('click', 'li', function() {
-				if ($(this).hasClass('active')) {
-					return;
-				}
+			this.$list.onclick = function(e) {
+				var that = e.target;
 
-				octopus.catIndex($(this).index());  // 更新索引
-				self.render();  // 重新渲染列表
-				detailView.render();  // 渲染对应详情视图
-				formView.render();  // 渲染对应表单视图
-			});
+				if (that.nodeName.toLowerCase() === 'li') {
+					if (that.classList.contains('active')) {
+						return;
+					}
+
+					octopus.catIndex(that.index);  // 更新索引
+					self.render();  // 重新渲染列表
+					detailView.render();  // 渲染对应详情视图
+					formView.render();  // 渲染对应表单视图
+				}
+			}
 
 			this.render();
 		},
@@ -66,30 +70,32 @@ $(function() {
 				lists.push(btn);
 			});
 
-			this.$list.html(lists.join(' '));
+			this.$list.innerHTML = lists.join(' ');
 		}
 	};
 
 	// 详情视图
 	var detailView = {
 		init: function() {
-			this.$name = $('#catName');
-			this.$img = $('#catImg');
-			this.$clickCount = $('#catClicks');
+			this.$name = $$('#catName');
+			this.$img = $$('#catImg');
+			this.$clickCount = $$('#catClicks');
 
 			// 点击计数
-			$('#catDetail').on('click', 'img', function() {
-				octopus.increase();
-			});
+			$$('#catDetail').onclick = function(e) {
+				if (e.target.nodeName.toLowerCase() === 'img') {
+					octopus.increase();
+				}
+			}
 
 			this.render();
 		},
 		render: function() {
 			var data = octopus.getCurrent();
 
-			this.$name.html(data.name);
-			this.$img.attr('src', 'images/' + data.imgUrl);
-			this.$clickCount.html(data.clicks);
+			this.$name.innerHTML = data.name;
+			this.$img.src = 'images/' + data.imgUrl;
+			this.$clickCount.innerHTML = data.clicks;
 		}
 	};
 
@@ -98,34 +104,34 @@ $(function() {
 		init: function() {
 			var self = this;
 
-			this.$form = $('.form');
-			this.$inputName = $('#name');
-			this.$inputImgUrl = $('#imgUrl');
-			this.$inputClicks = $('#clicks');
+			this.$form = $$('.form');
+			this.$inputName = $$('#name');
+			this.$inputImgUrl = $$('#imgUrl');
+			this.$inputClicks = $$('#clicks');
 
 			// 切换 form 可见性
-			$('.btn-admin').click(function() {
+			$$('.btn-admin').onclick = function() {
 				var oldState = octopus.adminMode();
 
 				octopus.adminMode(!oldState);  // 点击后状态取反
 				self.render();
-			});
+			}
 
 			// 保存
-			$('.btn-save').click(function() {
+			$$('.btn-save').onclick = function() {
 				octopus.update({
-					name: self.$inputName.val(),
-					imgUrl: self.$inputImgUrl.val(),
-					clicks: Number(self.$inputClicks.val())
+					name: self.$inputName.value,
+					imgUrl: self.$inputImgUrl.value,
+					clicks: Number(self.$inputClicks.value)
 				});
 
 				detailView.render();
-			});
+			}
 
 			// 取消
-			$('.btn-cancel').click(function() {
+			$$('.btn-cancel').onclick = function() {
 				self.render();
-			});
+			}
 		},
 		render: function() {
 			var data = octopus.getCurrent();
@@ -133,12 +139,12 @@ $(function() {
 
 			// admin 模式：显示表单并赋值表单元素
 			if (isAdminMode) {
-				this.$form.show();
-				this.$inputName.val(data.name);
-				this.$inputImgUrl.val(data.imgUrl);
-				this.$inputClicks.val(data.clicks);
+				this.$form.style.display = 'block';
+				this.$inputName.value = data.name;
+				this.$inputImgUrl.value = data.imgUrl;
+				this.$inputClicks.value = data.clicks;
 			} else {
-				this.$form.hide();
+				this.$form.style.display = 'none';
 			}
 		}
 	};
@@ -197,4 +203,4 @@ $(function() {
 	};
 
 	octopus.init();
-});
+}();
