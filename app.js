@@ -125,6 +125,7 @@
 					clicks: Number(self.$inputClicks.value)
 				});
 
+				listView.render();
 				detailView.render();
 			}
 
