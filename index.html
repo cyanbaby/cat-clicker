@@ -1,59 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 	<title>Cat Clicker</title>
-	<style>
-		#catList {float: left; margin-right: 30px;}
-		#catList > li {padding: 5px 0; cursor: pointer;}
-		#catDetail {overflow: hidden;}
-		#catDetail > img {max-width: 400px; max-height: 280px;}
-		#catClicks {margin-left: 30px;}
-		.active {color: #06c;}
-
-		.form {position: absolute; display: none; transform: translate(50%, -50px);}
-		.form label {display: inline-block; width: 5em; margin-right: 5px; text-align: right;}
-		.btn-group {padding-left: calc(5em + 5px);}
-	</style>
+	<link rel="stylesheet" href="./index.css">
+	<link rel="stylesheet" href="./app.css">
 </head>
 <body>
-	<!-- 列表 -->
-	<ul id="catList"></ul>
+  <div class="App">
+    <!-- 列表 -->
+    <ul class="list"></ul>
 
-	<!-- 详情 -->
-	<div id="catDetail">
-		<p>
-			<strong id="catName"></strong>
-			<span id="catClicks"></span> clicks
-		</p>
-		<img id="catImg" src="">
-	</div>
+    <!-- 详情 -->
+    <div class="cat-view">
+      <p>
+        <strong id="catName"></strong>
+        <span class="cat-clicks"></span> clicks
+      </p>
+      <img id="catImg" src="">
+      <p id="outputInfo"></p>
+    </div>
 
-	<!-- 表单 -->
-	<div>
-		<p><button class="btn-admin">Admin</button></p>
-		<div class="form">
-			<p>
-				<label>Name: </label>
-				<input type="text" id="name">
-			</p>
-			<p>
-				<label>ImgURL: </label>
-				<input type="text" id="imgUrl">
-			</p>
-			<p>
-				<label>Clicks: </label>
-				<input type="text" id="clicks">
-			</p>
-			<p class="btn-group">
-				<button class="btn-cancel">Cancel</button>
-				<button class="btn-save">Save</button>
-			</p>
-		</div>
-	</div>
+    <!-- 表单 -->
+    <div>
+      <p><button class="btn-admin">Admin</button></p>
+      <div class="form">
+        <p>
+          <label>Name: </label>
+          <input type="text" id="name">
+        </p>
+        <p>
+          <label>ImgURL: </label>
+          <input type="text" id="imgUrl">
+        </p>
+        <p>
+          <label>Clicks: </label>
+          <input type="text" id="clicks">
+        </p>
+        <p class="btn-group">
+          <button class="btn-cancel">Cancel</button>
+          <button class="btn-save">Save</button>
+        </p>
+      </div>
+    </div>
+  </div>
 
-	<script src="selector.js"></script>
-	<script src="node-index.js"></script>
+	<script src="./modules/selector.js"></script>
+	<script src="./modules/node-index.js"></script>
 	<script src="app.js"></script>
 </body>
 </html>

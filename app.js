@@ -34,7 +34,7 @@
 		init: function() {
 			var self = this;
 
-			this.$list = $$('#catList');
+			this.$list = $$('.list');
 
 			// 切换列表点击事件
 			this.$list.onclick = function(e) {
@@ -48,7 +48,8 @@
 					octopus.catIndex(that.index);  // 更新索引
 					self.render();  // 重新渲染列表
 					detailView.render();  // 渲染对应详情视图
-					formView.render();  // 渲染对应表单视图
+          formView.render();  // 渲染对应表单视图
+          outputView.render();  // 渲染输出信息
 				}
 			}
 
@@ -79,12 +80,12 @@
 		init: function() {
 			this.$name = $$('#catName');
 			this.$img = $$('#catImg');
-			this.$clickCount = $$('#catClicks');
+			this.$clickCount = $$('.cat-clicks');
 
 			// 点击计数
-			$$('#catDetail').onclick = function(e) {
+			$$('.cat-view').onclick = function(e) {
 				if (e.target.nodeName.toLowerCase() === 'img') {
-					octopus.increase();
+          octopus.increase();
 				}
 			}
 
@@ -97,7 +98,26 @@
 			this.$img.src = 'images/' + data.imgUrl;
 			this.$clickCount.innerHTML = data.clicks;
 		}
-	};
+  };
+
+  // 输出信息视图
+  var outputView = {
+    init: function() {
+      this.$el = $$('#outputInfo');
+      this.render();
+    },
+    render: function() {
+      var cats = octopus.getAll();
+      var index = octopus.catIndex();
+      var clicks = cats[index].clicks;
+
+      this.$el.innerHTML = (
+        '共 ' + cats.length + ' 只猫咪，' +
+        '当前为第 ' + (index + 1) + ' 只，' +
+        '被点击了 ' + clicks + ' 次'
+      );
+    }
+  };
 
 	// 表单视图
 	var formView = {
@@ -126,7 +146,8 @@
 				});
 
 				listView.render();
-				detailView.render();
+        detailView.render();
+        outputView.render();
 			}
 
 			// 取消
@@ -148,7 +169,7 @@
 				this.$form.style.display = 'none';
 			}
 		}
-	};
+  };
 
 	/********************** Presenter **********************/
 	var octopus = {
@@ -177,7 +198,9 @@
 		// 更新点击数
 		increase: function() {
 			this.getCurrent().clicks++;
-			detailView.render();
+      detailView.render();
+      formView.render();
+      outputView.render();
 		},
 
 		// 获取/设置 admin 模式
@@ -199,7 +222,8 @@
 
 			listView.init();
 			detailView.init();
-			formView.init();
+      formView.init();
+      outputView.init();
 		}
 	};
 
