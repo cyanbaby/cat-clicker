@@ -25,3 +25,9 @@
 2. **View：** 定义了三个 view 视图，分别为列表视图、详情视图和表单视图，各个视图负责包含自身的渲染逻辑以及事件绑定，并对外提供接口供上层操作。
 
 3. **Presenter：** 负责对较为复杂的、高层次的 UI 操作进行响应，获取 Model 中的对应数据提供给 View。
+
+## 相关
+
+- [cat-clicker-react](https://github.com/wingmeng/cat-clicker-react)
+- [cat-clicker-react-redux](https://github.com/wingmeng/cat-clicker-react-redux)
+- [cat-clicker-vue](https://github.com/wingmeng/cat-clicker-vue)
