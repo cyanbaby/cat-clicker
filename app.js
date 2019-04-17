@@ -142,7 +142,7 @@
 				octopus.update({
 					name: self.$inputName.value,
 					imgUrl: self.$inputImgUrl.value,
-					clicks: Number(self.$inputClicks.value)
+					clicks: parseInt(self.$inputClicks.value, 10)
 				});
 
 				listView.render();
